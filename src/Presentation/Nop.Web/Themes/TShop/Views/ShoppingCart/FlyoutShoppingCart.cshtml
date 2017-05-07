@@ -1,0 +1,56 @@
+﻿@model MiniShoppingCartModel
+@using Nop.Web.Models.ShoppingCart;
+
+<div class="flyout-cart">
+    <div class="w100 miniCartTable scroll-pane">
+        <table>
+            <tbody>
+                @foreach (var item in Model.Items)
+            {
+                    <tr class="miniCartProduct">
+                        @if (Model.ShowProductImages)
+                {
+                            <td style="width: 20%" class="miniCartProductThumb">
+                                <div>
+                                    <a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })"> <img src="@item.Picture.ImageUrl" title="@item.Picture.Title" alt="@item.Picture.AlternateText"> </a>
+                                </div>
+                            </td>
+                        }
+                        <td style="width: @(Model.ShowProductImages ? "55" : "75")%">
+                            <div class="miniCartDescription">
+                                <h4><a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })"> @item.ProductName</a></h4>
+                                <div style="font-size: 8px;">
+                                    @Html.Raw(item.AttributeInfo)
+                                </div>
+                                <div class="price"><span> @item.UnitPrice</span></div>
+                            </div>
+                        </td>
+                        <td style="width: 10%" class="miniCartQuantity"><a> x @item.Quantity</a></td>
+                        <td style="width: 15%" class="miniCartSubtotal"><span> @item.AllUnitsPrice</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="miniCartFooter @(Model.IsMobileView ? "miniCartFooterInMobile" : "") text-right">
+        <h3 class="text-right subtotal">@T("ShoppingCart.ItemTotal") @Model.SubTotal</h3>
+        @if (Model.DisplayShoppingCartButton)
+        {
+            <a class="btn btn-sm btn-danger" href="@Url.RouteUrl("ShoppingCart")"><i class="fa fa-shopping-cart"> </i> @T("ShoppingCart.Mini.ViewCart")</a>
+        }
+        @if (Model.DisplayCheckoutButton)
+        {
+            var checkoutUrl = "";
+            if (Model.AnonymousCheckoutAllowed && Model.CurrentCustomerIsGuest)
+            {
+                checkoutUrl = Url.RouteUrl("LoginCheckoutAsGuest", new { returnUrl = Url.RouteUrl("ShoppingCart") });
+            }
+            else
+            {
+                checkoutUrl = Url.RouteUrl("Checkout");
+            }
+
+            <a href="@checkoutUrl" class="btn btn-sm btn-primary">@T("Checkout.Button")</a>
+        }
+    </div>
+</div>

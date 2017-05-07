@@ -1606,7 +1606,7 @@ namespace Nop.Web.Controllers
         }
 
         [ChildActionOnly]
-        public virtual ActionResult FlyoutShoppingCart()
+        public virtual ActionResult FlyoutShoppingCart(bool forMobile = false)
         {
             if (!_shoppingCartSettings.MiniShoppingCartEnabled)
                 return Content("");
@@ -1615,6 +1615,8 @@ namespace Nop.Web.Controllers
                 return Content("");
 
             var model = _shoppingCartModelFactory.PrepareMiniShoppingCartModel();
+            model.IsMobileView = forMobile;
+
             return PartialView(model);
         }
 

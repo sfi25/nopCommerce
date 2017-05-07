@@ -19,7 +19,7 @@ namespace Nop.Web.Models.ShoppingCart
         public bool CurrentCustomerIsGuest { get; set; }
         public bool AnonymousCheckoutAllowed { get; set; }
         public bool ShowProductImages { get; set; }
-
+        public bool IsMobileView { get; set; }
 
         #region Nested Classes
 
@@ -39,6 +39,8 @@ namespace Nop.Web.Models.ShoppingCart
             public int Quantity { get; set; }
 
             public string UnitPrice { get; set; }
+            
+            public string AllUnitsPrice { get; set; }
 
             public string AttributeInfo { get; set; }
 

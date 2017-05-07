@@ -16161,6 +16161,9 @@
   <LocaleResource Name="ShoppingCart">
     <Value>Shopping cart</Value>
   </LocaleResource>
+  <LocaleResource Name="ShoppingCart.ShortName">
+    <Value>Cart</Value>
+  </LocaleResource>
   <LocaleResource Name="ShoppingCart.AddToCart">
     <Value>Add to cart</Value>
   </LocaleResource>
@@ -16285,7 +16288,7 @@
     <Value>The coupon code you entered couldn't be applied to your order</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.HeaderQuantity">
-    <Value>({0})</Value>
+    <Value>{0}</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.Image">
     <Value>Image</Value>
@@ -16621,7 +16624,7 @@
     <Value>Enter your email</Value>
   </LocaleResource>
   <LocaleResource Name="Wishlist.HeaderQuantity">
-    <Value>({0})</Value>
+    <Value>{0}</Value>
   </LocaleResource>
   <LocaleResource Name="Wishlist.TaxShipping.ExclTax">
     <Value><![CDATA[All prices are entered excluding tax. Excluding <a href="{0}">shipping</a>]]></Value>

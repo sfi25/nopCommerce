@@ -1025,6 +1025,7 @@ namespace Nop.Web.Factories
                             decimal shoppingCartUnitPriceWithDiscountBase = _taxService.GetProductPrice(sci.Product, _priceCalculationService.GetUnitPrice(sci), out taxRate);
                             decimal shoppingCartUnitPriceWithDiscount = _currencyService.ConvertFromPrimaryStoreCurrency(shoppingCartUnitPriceWithDiscountBase, _workContext.WorkingCurrency);
                             cartItemModel.UnitPrice = _priceFormatter.FormatPrice(shoppingCartUnitPriceWithDiscount);
+                            cartItemModel.AllUnitsPrice = _priceFormatter.FormatPrice(shoppingCartUnitPriceWithDiscount*sci.Quantity);
                         }
 
                         //picture

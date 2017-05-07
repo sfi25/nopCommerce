@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Nop.Web.Framework.Mvc;
 
 namespace Nop.Web.Models.Catalog
@@ -19,5 +20,7 @@ namespace Nop.Web.Models.Catalog
         public bool IncludeInTopMenu { get; set; }
 
         public List<CategorySimpleModel> SubCategories { get; set; }
+
+        public int SubCategoryDepth => SubCategories.Any() ? 1 + SubCategories.Max(m => m.SubCategoryDepth) : 0;
     }
 }

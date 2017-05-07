@@ -1,0 +1,91 @@
+﻿@model HeaderLinksModel
+@using Nop.Web.Models.Common;
+
+<div class="navbar-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
+                <div class="pull-left ">
+                    <ul class="userMenu ">
+                        <li><a href="#"><span class="hidden-xs">HELP</span><i class="glyphicon glyphicon-info-sign hide visible-xs "></i></a></li>
+                        <li class="phone-number"><a href="callto:+12025550151"><span><i class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs" style="margin-left:5px">+1-202-555-0151</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
+                <div class="pull-right">
+                    <ul class="userMenu">
+                        @Html.Widget("header_links_before")
+                        @if (Model.IsAuthenticated)
+                        {
+                            if (Model.AllowPrivateMessages)
+                            {
+                                <li><a href="@Url.RouteUrl("PrivateMessages", new { tab = "" })"><span class="hidden-xs">@T("PrivateMessages.Inbox")</span> <i class="glyphicon glyphicon-envelope hide visible-xs "></i></a></li>
+                            }
+
+                            <li><a href="@Url.RouteUrl("CustomerInfo")"><span class="hidden-xs">@T("Account.MyAccount")</span> <i class="glyphicon glyphicon-user hide visible-xs "></i></a></li>
+                            <li><a href="@Url.RouteUrl("Logout")"><span class="hidden-xs">@T("Account.Logout")</span><i class="glyphicon glyphicon-log-out hide visible-xs "></i></a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.RouteUrl("Register")"><span class="hidden-xs">@T("Account.Register")</span> <i class="glyphicon glyphicon-star hide visible-xs "></i></a></li>
+                            <li><a href="@Url.RouteUrl("Login")"><span class="hidden-xs">@T("Account.Login")</span><i class="glyphicon glyphicon-log-in hide visible-xs "></i></a></li>
+                        }
+                        @Html.Widget("header_links_after")
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container header-links">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"> </span> <span class="icon-bar"></span> <span class="icon-bar"> </span>
+        </button>
+        @if (Model.ShoppingCartEnabled)
+        {
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart">
+                <i class="fa fa-shopping-cart colorWhite"></i> <span class="cartRespons colorWhite">@T("ShoppingCart.ShortName").Text.ToUpper() <span class="label label-success cart-qty">@Model.ShoppingCartItems</span></span>
+            </button>
+        }
+
+        @Html.Action("Logo", "Common")
+
+        <!-- this part for mobile -->
+        <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
+            <div class="input-group">
+                <button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar-cart collapse">
+        <div class="cartMenu col-lg-4 col-xs-12 col-md-4 ">
+            @Html.Action("FlyoutShoppingCart", "ShoppingCart", new { forMobile = true })
+        </div>
+    </div>
+    
+    <div class="navbar-collapse collapse">
+        @Html.Action("TopMenu", "Catalog")
+
+        <!--- this part will be hidden for mobile version -->
+        <div class="nav navbar-nav navbar-right hidden-xs">
+            <div class="dropdown  cartMenu ">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-shopping-cart"></i> <span class="cartRespons">@T("ShoppingCart.ShortName") <span class="label label-success cart-qty">@Model.ShoppingCartItems</span></span> <b class="caret"></b>
+                </a>
+                <div class="dropdown-menu col-lg-4 col-xs-12 col-md-4 ">
+                    @Html.Action("FlyoutShoppingCart", "ShoppingCart")
+                </div>
+            </div>
+
+            <div class="search-box">
+                <div class="input-group">
+                    <button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

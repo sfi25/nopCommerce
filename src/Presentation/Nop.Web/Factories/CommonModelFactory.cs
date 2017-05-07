@@ -180,25 +180,27 @@ namespace Nop.Web.Factories
         {
             var model = new LogoModel
             {
-                StoreName = _storeContext.CurrentStore.GetLocalized(x => x.Name)
+                StoreName = _storeContext.CurrentStore.GetLocalized(x => x.Name),
+                HasCustomLogo = true
             };
 
             var cacheKey = string.Format(ModelCacheEventConsumer.STORE_LOGO_PATH, _storeContext.CurrentStore.Id, _themeContext.WorkingThemeName, _webHelper.IsCurrentConnectionSecured());
             model.LogoPath = _cacheManager.Get(cacheKey, () =>
             {
-                var logo = "";
+                string logo = null;
                 var logoPictureId = _storeInformationSettings.LogoPictureId;
+
                 if (logoPictureId > 0)
-                {
                     logo = _pictureService.GetPictureUrl(logoPictureId, showDefaultPicture: false);
-                }
-                if (String.IsNullOrEmpty(logo))
-                {
-                    //use default logo
-                    logo = string.Format("{0}Themes/{1}/Content/images/logo.png", _webHelper.GetStoreLocation(), _themeContext.WorkingThemeName);
-                }
+
                 return logo;
             });
+
+            if (string.IsNullOrEmpty(model.LogoPath))
+            {
+                model.LogoPath = string.Format("{0}Themes/{1}/Content/images/logo.png", _webHelper.GetStoreLocation(), _themeContext.WorkingThemeName);
+                model.HasCustomLogo = false;
+            }
 
             return model;
         }
