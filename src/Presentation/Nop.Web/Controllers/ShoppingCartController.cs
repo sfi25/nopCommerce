@@ -72,6 +72,7 @@ namespace Nop.Web.Controllers
         private readonly OrderSettings _orderSettings;
         private readonly CaptchaSettings _captchaSettings;
         private readonly CustomerSettings _customerSettings;
+        private readonly IMeasureService _measureService;
 
         #endregion
 
@@ -106,7 +107,8 @@ namespace Nop.Web.Controllers
             ShoppingCartSettings shoppingCartSettings,
             OrderSettings orderSettings,
             CaptchaSettings captchaSettings,
-            CustomerSettings customerSettings)
+            CustomerSettings customerSettings,
+            IMeasureService measureService)
         {
             this._shoppingCartModelFactory = shoppingCartModelFactory;
             this._productService = productService;
@@ -140,6 +142,7 @@ namespace Nop.Web.Controllers
             this._orderSettings = orderSettings;
             this._captchaSettings = captchaSettings;
             this._customerSettings = customerSettings;
+            _measureService = measureService;
         }
 
         #endregion
@@ -952,6 +955,7 @@ namespace Nop.Web.Controllers
 
             //price
             string price = "";
+            string basePrice = "";
             if (_permissionService.Authorize(StandardPermissionProvider.DisplayPrices) && !product.CustomerEntersPrice)
             {
                 //we do not calculate price of "customer enters price" option is enabled
@@ -967,6 +971,13 @@ namespace Nop.Web.Controllers
                 decimal finalPriceWithDiscountBase = _taxService.GetProductPrice(product, finalPrice, out taxRate);
                 decimal finalPriceWithDiscount = _currencyService.ConvertFromPrimaryStoreCurrency(finalPriceWithDiscountBase, _workContext.WorkingCurrency);
                 price = _priceFormatter.FormatPrice(finalPriceWithDiscount);
+
+                decimal additionalBaseAmount = 0;
+
+                foreach (ProductAttributeValue pav in _productAttributeParser.ParseProductAttributeValues(attributeXml))
+                    additionalBaseAmount += pav.BaseAmountAdjustment;
+                
+                basePrice = product.FormatBasePrice(finalPriceWithDiscount, product.BasepriceAmount + additionalBaseAmount, _localizationService, _measureService, _currencyService, _workContext, _priceFormatter);
             }
 
             //stock
@@ -1031,6 +1042,7 @@ namespace Nop.Web.Controllers
                 mpn = mpn,
                 sku = sku,
                 price = price,
+                baseprice = basePrice,
                 stockAvailability = stockAvailability,
                 enabledattributemappingids = enabledAttributeMappingIds.ToArray(),
                 disabledattributemappingids = disabledAttributeMappingIds.ToArray(),

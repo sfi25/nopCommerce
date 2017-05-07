@@ -3463,6 +3463,7 @@ namespace Nop.Admin.Controllers
                     Name = predefinedValue.Name,
                     PriceAdjustment = predefinedValue.PriceAdjustment,
                     WeightAdjustment = predefinedValue.WeightAdjustment,
+                    BaseAmountAdjustment = predefinedValue.BaseAmountAdjustment,
                     Cost = predefinedValue.Cost,
                     IsPreSelected = predefinedValue.IsPreSelected,
                     DisplayOrder = predefinedValue.DisplayOrder
@@ -3925,6 +3926,8 @@ namespace Nop.Admin.Controllers
                         PriceAdjustmentStr = x.AttributeValueType == AttributeValueType.Simple ? x.PriceAdjustment.ToString("G29") : "",
                         WeightAdjustment = x.WeightAdjustment,
                         WeightAdjustmentStr = x.AttributeValueType == AttributeValueType.Simple ? x.WeightAdjustment.ToString("G29") : "",
+                        BaseAmountAdjustment = x.BaseAmountAdjustment,
+                        BaseAmountAdjustmentStr = x.AttributeValueType == AttributeValueType.Simple ? x.BaseAmountAdjustment.ToString("G29") : "",
                         Cost = x.Cost,
                         CustomerEntersQty = x.CustomerEntersQty,
                         Quantity = x.Quantity,
@@ -4114,6 +4117,7 @@ namespace Nop.Admin.Controllers
                 DisplayImageSquaresPicture = pav.ProductAttributeMapping.AttributeControlType == AttributeControlType.ImageSquares,
                 PriceAdjustment = pav.PriceAdjustment,
                 WeightAdjustment = pav.WeightAdjustment,
+                BaseAmountAdjustment = pav.BaseAmountAdjustment,
                 Cost = pav.Cost,
                 CustomerEntersQty = pav.CustomerEntersQty,
                 Quantity = pav.Quantity,
@@ -4195,6 +4199,7 @@ namespace Nop.Admin.Controllers
                 pav.ImageSquaresPictureId = model.ImageSquaresPictureId;
                 pav.PriceAdjustment = model.PriceAdjustment;
                 pav.WeightAdjustment = model.WeightAdjustment;
+                pav.BaseAmountAdjustment = model.BaseAmountAdjustment;
                 pav.Cost = model.Cost;
                 pav.CustomerEntersQty = model.CustomerEntersQty;
                 pav.Quantity = model.CustomerEntersQty ? 1 : model.Quantity;

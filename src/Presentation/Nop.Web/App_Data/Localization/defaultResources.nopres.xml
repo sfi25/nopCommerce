@@ -1791,6 +1791,12 @@
   <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.WeightAdjustment.Hint">
     <Value>The weight adjustment applied when choosing this attribute value.</Value>
   </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.BaseAmountAdjustment">
+    <Value>Base amount adjustment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.BaseAmountAdjustment.Hint">
+    <Value>The base amount adjustment applied when choosing this attribute value.</Value>
+  </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Hint">
     <Value>Predefined (default) values are helpful for a store owner when creating new products. Then when you add the attribute to a product, you don't have to create the values again.</Value>
   </LocaleResource>
@@ -3596,6 +3602,12 @@
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.WeightAdjustment">
     <Value>Weight adjustment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.BaseAmountAdjustment">
+    <Value>Base amount adjustment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.BaseAmountAdjustment.Hint">
+    <Value>The base amount adjustment applied when choosing this attribute value.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.WeightAdjustment.Hint">
     <Value>The weight adjustment applied when choosing this attribute value.</Value>

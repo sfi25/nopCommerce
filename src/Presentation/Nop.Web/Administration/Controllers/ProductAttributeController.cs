@@ -296,6 +296,8 @@ namespace Nop.Admin.Controllers
                         PriceAdjustmentStr = x.PriceAdjustment.ToString("G29"),
                         WeightAdjustment = x.WeightAdjustment,
                         WeightAdjustmentStr = x.WeightAdjustment.ToString("G29"),
+                        BaseAmountAdjustment = x.BaseAmountAdjustment,
+                        BaseAmountAdjustmentStr = x.BaseAmountAdjustment.ToString("G29"),
                         Cost = x.Cost,
                         IsPreSelected = x.IsPreSelected,
                         DisplayOrder = x.DisplayOrder
@@ -344,6 +346,7 @@ namespace Nop.Admin.Controllers
                     Name = model.Name,
                     PriceAdjustment = model.PriceAdjustment,
                     WeightAdjustment = model.WeightAdjustment,
+                    BaseAmountAdjustment = model.BaseAmountAdjustment,
                     Cost = model.Cost,
                     IsPreSelected = model.IsPreSelected,
                     DisplayOrder = model.DisplayOrder
@@ -378,6 +381,7 @@ namespace Nop.Admin.Controllers
                 Name = ppav.Name,
                 PriceAdjustment = ppav.PriceAdjustment,
                 WeightAdjustment = ppav.WeightAdjustment,
+                BaseAmountAdjustment = ppav.BaseAmountAdjustment,
                 Cost = ppav.Cost,
                 IsPreSelected = ppav.IsPreSelected,
                 DisplayOrder = ppav.DisplayOrder
@@ -405,6 +409,7 @@ namespace Nop.Admin.Controllers
                 ppav.Name = model.Name;
                 ppav.PriceAdjustment = model.PriceAdjustment;
                 ppav.WeightAdjustment = model.WeightAdjustment;
+                ppav.BaseAmountAdjustment = model.BaseAmountAdjustment;
                 ppav.Cost = model.Cost;
                 ppav.IsPreSelected = model.IsPreSelected;
                 ppav.DisplayOrder = model.DisplayOrder;

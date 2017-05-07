@@ -486,13 +486,14 @@ namespace Nop.Services.Catalog
         /// </summary>
         /// <param name="product">Product</param>
         /// <param name="productPrice">Product price (in primary currency). Pass null if you want to use a default produce price</param>
+        /// <param name="baseAmount"></param>
         /// <param name="localizationService">Localization service</param>
         /// <param name="measureService">Measure service</param>
         /// <param name="currencyService">Currency service</param>
         /// <param name="workContext">Work context</param>
         /// <param name="priceFormatter">Price formatter</param>
         /// <returns>Base price</returns>
-        public static string FormatBasePrice(this Product product, decimal? productPrice, ILocalizationService localizationService,
+        public static string FormatBasePrice(this Product product, decimal? productPrice, decimal baseAmount, ILocalizationService localizationService,
             IMeasureService measureService, ICurrencyService currencyService,
             IWorkContext workContext, IPriceFormatter priceFormatter)
         {
@@ -517,10 +518,6 @@ namespace Nop.Services.Catalog
             if (!product.BasepriceEnabled)
                 return null;
 
-            var productAmount = product.BasepriceAmount;
-            //Amount in product cannot be 0
-            if (productAmount == 0)
-                return null;
             var referenceAmount = product.BasepriceBaseAmount;
             var productUnit = measureService.GetMeasureWeightById(product.BasepriceUnitId);
             //measure weight cannot be loaded
@@ -535,7 +532,7 @@ namespace Nop.Services.Catalog
 
             decimal basePrice = productPrice.Value /
                 //do not round. otherwise, it can cause issues
-                measureService.ConvertWeight(productAmount, productUnit, referenceUnit, false) * 
+                measureService.ConvertWeight(baseAmount, productUnit, referenceUnit, false) * 
                 referenceAmount;
             decimal basePriceInCurrentCurrency = currencyService.ConvertFromPrimaryStoreCurrency(basePrice, workContext.WorkingCurrency);
             string basePriceStr = priceFormatter.FormatPrice(basePriceInCurrentCurrency, true, false);

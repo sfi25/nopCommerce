@@ -413,6 +413,9 @@
                         if (data.price) {
                             $('.price-value-@productId').text(data.price);
                         }
+                        if (data.baseprice) {
+                            $('.base-price-pangv').text(data.baseprice);
+                        }
                         if (data.sku) {
                             $('#sku-@productId').text(data.sku).parent(".sku").show();
                         } else {

@@ -27,6 +27,8 @@ namespace Nop.Core.Domain.Catalog
         /// </summary>
         public decimal WeightAdjustment { get; set; }
 
+        public decimal BaseAmountAdjustment { get; set; }
+
         /// <summary>
         /// Gets or sets the attibute value cost
         /// </summary>

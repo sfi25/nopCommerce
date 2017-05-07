@@ -270,7 +270,7 @@ namespace Nop.Web.Factories
                                         priceModel.OldPrice = null;
                                         priceModel.Price = _localizationService.GetResource("Products.CallForPrice");
                                     }
-                                    else if (minPossiblePrice.HasValue)
+                                    else
                                     {
                                         //calculate prices
                                         decimal taxRate;
@@ -282,15 +282,9 @@ namespace Nop.Web.Factories
                                         priceModel.PriceValue = finalPrice;
 
                                         //PAngV baseprice (used in Germany)
-                                        priceModel.BasePricePAngV = product.FormatBasePrice(finalPrice,
+                                        priceModel.BasePricePAngV = product.FormatBasePrice(finalPrice, product.BasepriceAmount,
                                             _localizationService, _measureService, _currencyService, _workContext,
                                             _priceFormatter);
-                                    }
-                                    else
-                                    {
-                                        //Actually it's not possible (we presume that minimalPrice always has a value)
-                                        //We never should get here
-                                        Debug.WriteLine("Cannot calculate minPrice for product #{0}", product.Id);
                                     }
                                 }
                             }
@@ -419,7 +413,7 @@ namespace Nop.Web.Factories
 
 
                                 //PAngV baseprice (used in Germany)
-                                priceModel.BasePricePAngV = product.FormatBasePrice(finalPrice,
+                                priceModel.BasePricePAngV = product.FormatBasePrice(finalPrice, product.BasepriceAmount,
                                     _localizationService, _measureService, _currencyService, _workContext,
                                     _priceFormatter);
                             }
@@ -615,7 +609,7 @@ namespace Nop.Web.Factories
                             !product.IsFreeShipping;
 
                         //PAngV baseprice (used in Germany)
-                        model.BasePricePAngV = product.FormatBasePrice(finalPriceWithDiscountBase,
+                        model.BasePricePAngV = product.FormatBasePrice(finalPriceWithDiscountBase, product.BasepriceAmount,
                             _localizationService, _measureService, _currencyService, _workContext, _priceFormatter);
 
                         //currency code
